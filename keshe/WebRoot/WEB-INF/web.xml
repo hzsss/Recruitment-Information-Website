@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <display-name></display-name>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>HandleRegister</servlet-name>
+    <servlet-class>com.keshe.myservlet.control.HandleRegister</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>HandleLogin</servlet-name>
+    <servlet-class>com.keshe.myservlet.control.HandleLogin</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>HandleExit</servlet-name>
+    <servlet-class>com.keshe.myservlet.control.HandleExit</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>HandlePublish</servlet-name>
+    <servlet-class>com.keshe.myservlet.control.HandlePublish</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>HandlePassword</servlet-name>
+    <servlet-class>com.keshe.myservlet.control.HandlePassword</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>HandleIndex</servlet-name>
+    <servlet-class>com.keshe.myservlet.control.HandleIndex</servlet-class>
+  </servlet>
+
+
+
+
+
+
+  <servlet-mapping>
+    <servlet-name>HandleRegister</servlet-name>
+    <url-pattern>/helpRegister</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>HandleLogin</servlet-name>
+    <url-pattern>/helpLogin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>HandleExit</servlet-name>
+    <url-pattern>/helpExit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>HandlePublish</servlet-name>
+    <url-pattern>/helpPublish</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>HandlePassword</servlet-name>
+    <url-pattern>/helpChangePassword</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>HandleIndex</servlet-name>
+    <url-pattern>/helpIndex</url-pattern>
+  </servlet-mapping>	
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>

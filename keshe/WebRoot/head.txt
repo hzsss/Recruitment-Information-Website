@@ -1,0 +1,12 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<center><font size="5">招聘信息网</font></center>
+<table cellspacing="1" cellpadding="1" width="560" align="center" border="0">
+	<tr valign="bottom">
+		<td><a href="index.jsp"><font size="2">主页</font></a></td>
+		<td><a href="register.jsp"><font size="2">用户注册</font></a></td>
+		<td><a href="login.jsp"><font size="2">用户登录</font></a></td>
+		<td><a href="publish.jsp"><font size="2">发布招聘信息</font></a></td>
+		<td><a href="changePassword.jsp"><font size="2">修改密码</font></a></td>
+		<td><a href="helpExit"><font size="2">退出登录</font></a></td>
+	</tr>
+</table>
