@@ -1,4 +1,4 @@
-﻿package com.keshe.mybean.data;
+package com.keshe.mybean.data;
 import com.sun.rowset.*;
 
 public class Index {
@@ -6,7 +6,7 @@ public class Index {
 	int pageSize = 3; // 每页显示的记录数
 	int pageAllCount = 0; // 分页后的总页数
 	int showPage = 1; // 当前显示页
-	StringBuffer presentPageResult = null; // 显示当前页的内容
+	StringBuffer presentPageResult = null; // 显示当前页内容
 	
 	public void setRowSet(CachedRowSetImpl set) {
 		rowSet = set;

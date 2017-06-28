@@ -36,7 +36,6 @@ public class HandlePublish extends HttpServlet {
 		
 		request.setAttribute("publish", pub);
 		//String newid = request.getParameter("newsid").trim();
-		//String logname = loginBean.getLogname().trim();
 		String title = request.getParameter("title").trim();
 		String message = request.getParameter("message").trim();
 		String newstype = request.getParameter("newstype").trim();
@@ -44,11 +43,12 @@ public class HandlePublish extends HttpServlet {
 		String number = request.getParameter("number").trim();
 		String uri = "jdbc:mysql://localhost/factory?useUnicode=true&characterEncoding=utf-8&useSSL=false";
 		
-		if (loginBean != null) {
-			String logname = loginBean.getLogname().trim();
+		if (loginBean!=null) {
+			
 			boolean boo = (title.length()>0)&&(message.length()>0)&&(newstype.length()>0)&&(contact.length()>0)&&(number.length()>0);
-
+			
 			try {
+				String logname = loginBean.getLogname().trim();
 				con = DriverManager.getConnection(uri, "root", "7162");
 				String insertCondition = "INSERT INTO news(logname,title,message,newstype,uptime,contact,number) VALUES(?,?,?,?,?,?,?)";
 				sql = con.prepareStatement(insertCondition);
@@ -79,18 +79,16 @@ public class HandlePublish extends HttpServlet {
 					pub.setBackNews(backNews);
 				}
 				con.close();
-				RequestDispatcher dispatcher = request.getRequestDispatcher("showPublish.jsp");
-				dispatcher.forward(request, response);
 			} catch (SQLException exp) {
 				backNews = "登录后才能发布信息哦~";
 				pub.setBackNews(backNews);
 			}
+			RequestDispatcher dispatcher = request.getRequestDispatcher("showPublish.jsp");
+			dispatcher.forward(request, response);
 		} else {
-			//backNews = "登录后才能发布信息哦~";
-			//pub.setBackNews(backNews);
 			response.sendRedirect("login.jsp");
 		}
-	
+
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response)

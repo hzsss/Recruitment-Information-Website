@@ -9,7 +9,7 @@ import javax.servlet.http.*;
 
 public class HandleIndex extends HttpServlet {
 	CachedRowSetImpl rowSet = null;
-	
+	int newsid;
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		try {
@@ -46,9 +46,7 @@ public class HandleIndex extends HttpServlet {
 		} else {
 			index.setShowPage(showPage);
 		}
-		
-		System.out.println("按钮显示的页数"+showPage);
-		System.out.println("真实的页数"+index.getShowPage());
+
 		
 		String uri = "jdbc:mysql://localhost/factory?useUnicode=true&characterEncoding=utf-8&useSSL=false";
 		try {
@@ -82,7 +80,15 @@ public class HandleIndex extends HttpServlet {
 				str.append("<tr>");
 				for (int j=1; j<=8; j++) {
 					str.append("<td>"+rowSet.getString(j)+"</td>");
+					
 				}
+				
+				newsid = rowSet.getInt(1);
+				
+				String detail="<form action='helpDetail' method='post'>"+
+						  "<input type='hidden' name='detail' value="+newsid+">"+
+						  "<input type='submit' value='查看详情'></form>";
+				str.append("<td>"+detail+"</td>");
 				str.append("</tr>");
 				rowSet.next();
 			}

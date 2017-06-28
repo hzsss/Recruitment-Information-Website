@@ -41,6 +41,20 @@
     <servlet-name>HandleIndex</servlet-name>
     <servlet-class>com.keshe.myservlet.control.HandleIndex</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>HandleComment</servlet-name>
+    <servlet-class>com.keshe.myservlet.control.HandleComment</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>HandleDetail</servlet-name>
+    <servlet-class>com.keshe.myservlet.control.HandleDetail</servlet-class>
+  </servlet>
+
+
 
 
 
@@ -70,6 +84,14 @@
   <servlet-mapping>
     <servlet-name>HandleIndex</servlet-name>
     <url-pattern>/helpIndex</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>HandleComment</servlet-name>
+    <url-pattern>/helpComment</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>HandleDetail</servlet-name>
+    <url-pattern>/helpDetail</url-pattern>
   </servlet-mapping>	
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

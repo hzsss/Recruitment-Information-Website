@@ -65,14 +65,14 @@
 			<tr>
 				<td><TextArea name="message" Rows="6" Cols="80"></TextArea></td>
 			</tr>
-		
+			
 			<tr>
 				您的姓名<tb><input type="text" name="contact"></tb>
 			</tr><br>
 			<tr>
 				<tb>联系方式</tb><tb><input type="text" name="number"></tb>
 			</tr><br>
-		</table>
+		</table><br>
 		<input type="submit" name="g" value="发布">
 	</center></form>
 </body>
