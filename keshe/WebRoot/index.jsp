@@ -2,7 +2,7 @@
 
 <html>
 <head>
-	<%@ include file = "head.txt" %>
+	<%@ include file = "head.txt"%>
 </head>
 <body>
 	<center>

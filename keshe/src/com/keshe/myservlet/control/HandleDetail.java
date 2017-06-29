@@ -18,21 +18,24 @@ public class HandleDetail extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession(true);
 		Connection con = null;
 		Detail detail = new Detail();
-
+//		Comment comment = new Comment(); // 评论
+		int showPage = Integer.parseInt(request.getParameter("showPage"));
+		
+		System.out.print("当前的页数"+showPage);
+		
+		session.setAttribute("showPage", showPage);
 		
 		String uri = "jdbc:mysql://localhost/factory?useUnicode=true&characterEncoding=utf-8&useSSL=false";
 		try {
 			newsid = request.getParameter("detail");
-
-			System.out.print("id为"+newsid);
-			
 			con = DriverManager.getConnection(uri, "root", "7162");
 			Statement sql = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			ResultSet rs = sql.executeQuery("SELECT * FROM news where newsid ="+newsid);
 			rs.next();
-
+			
 			String title = rs.getString("title");
 			String contact = rs.getString(7);
 			String number = rs.getString(8);
@@ -43,12 +46,14 @@ public class HandleDetail extends HttpServlet {
 			detail.setNumber(number);
 			detail.setMessage(message);
 			detail.setNewsid(Integer.parseInt(newsid));
-			
+
 			con.close();
-			request.setAttribute("detail", detail);
+
+			session.setAttribute("detail", detail);
 		
 		} catch(SQLException exp) {}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("showDetail.jsp");
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("helpShowComment");
 		dispatcher.forward(request, response);
 		
 	}
