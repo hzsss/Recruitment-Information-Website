@@ -6,7 +6,6 @@
   <head>
     <%@ include file="head.txt" %>
   </head>
-  
   <body>
     <center>
       信息标题：<jsp:getProperty name="detail" property="title"/><br>
@@ -45,7 +44,7 @@
 			  <form action="helpComment" name="form" method="post">
 			  	<TextArea name="comment" Rows="6" Cols="80"></TextArea>			  	
 				<input type="hidden" name="newsid" value="<%=detail.getNewsid()%>">
-			  	<input type="submit" name="g" value="发布">
+			  	<input type="submit" name="g" value="评论">
 			  </form>
      </center>    
   </body>

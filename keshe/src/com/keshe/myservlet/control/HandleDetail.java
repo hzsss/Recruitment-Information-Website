@@ -24,8 +24,6 @@ public class HandleDetail extends HttpServlet {
 //		Comment comment = new Comment(); // 评论
 		int showPage = Integer.parseInt(request.getParameter("showPage"));
 		
-		System.out.print("当前的页数"+showPage);
-		
 		session.setAttribute("showPage", showPage);
 		
 		String uri = "jdbc:mysql://localhost/factory?useUnicode=true&characterEncoding=utf-8&useSSL=false";

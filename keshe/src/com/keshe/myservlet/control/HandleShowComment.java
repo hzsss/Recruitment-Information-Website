@@ -24,8 +24,7 @@ public class HandleShowComment extends HttpServlet {
 		Connection con = null;
 		StringBuffer presentPageResult = new StringBuffer();
 		Detail detail = (Detail)session.getAttribute("detail");
-		
-		System.out.print("测试Detail"+detail.getTitle());
+
 		
 		int showPage = Integer.parseInt(session.getAttribute("showPage").toString());
 		
@@ -55,8 +54,7 @@ public class HandleShowComment extends HttpServlet {
 			int m = rowSet.getRow();
 			int n = pageSize;
 			int pageAllCount = ((m%n)==0)?(m/n):(m/n+1);
-			
-			System.out.print("评论的总页数为"+pageAllCount);
+
 			
 			detail.setPageAllCount(pageAllCount);
 			presentPageResult = show(showPage, pageSize, rowSet);
@@ -73,9 +71,20 @@ public class HandleShowComment extends HttpServlet {
 			rowSet.absolute((page-1)*pageSize+1);
 			for (int i=1; i<=pageSize; i++) {
 				str.append("<tr>");
-				for (int j=1; j<=4; j++) {
-					str.append("<td>"+rowSet.getString(j)+"</td>");					
-				}
+				
+				str.append("<td>"+rowSet.getString("logname")+"</td>");
+				str.append("<td>"+rowSet.getString("comment")+"</td>");
+				
+				int commentid = rowSet.getInt("commentid"); // 评论的id
+				String comlogname = rowSet.getString("logname"); // 评论的用户名
+
+//				for (int j=1; j<=4; j++) {
+//					str.append("<td>"+rowSet.getString(j)+"</td>");
+//				}
+				String detail="<form action='helpDeleteComment' method='post'>"+"<input type='hidden' name='commentid' value="+commentid+">"
+						+"<input type='hidden' name='comlogname' value="+comlogname+">"+
+						  "<input type='submit' value='删除评论'></form>";
+				str.append("<td>"+detail+"</td>");
 				str.append("</tr>");
 				rowSet.next();
 			}

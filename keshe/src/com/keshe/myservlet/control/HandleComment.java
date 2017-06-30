@@ -52,6 +52,8 @@ public class HandleComment extends HttpServlet {
 			} catch(SQLException exp) {
 				System.out.print("错误");
 			}
+			RequestDispatcher dispatcher = request.getRequestDispatcher("helpShowComment");
+			dispatcher.forward(request, response);			
 		} else {
 			response.sendRedirect("login.jsp");
 		}
