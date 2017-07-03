@@ -41,31 +41,28 @@ public class HandlePassword extends HttpServlet {
 		request.setAttribute("password", passwordBean);
 		String oldPassword = request.getParameter("oldPassword");
 		String newPassword = request.getParameter("newPassword");
-		
-		System.out.print(oldPassword);
-		System.out.print(newPassword);
-		
+		String confirmPassword = request.getParameter("confirmPassword");
+
 		String uri = "jdbc:mysql://localhost/factory?useUnicode=true&characterEncoding=utf-8&useSSL=false";
 		try {
 			con = DriverManager.getConnection(uri, "root", "7162");
 			Statement sql = con.createStatement();
 			ResultSet rs = sql.executeQuery("SELECT * FROM users where logname='"+logname+"' And password='"+oldPassword+"'");
-			
-			System.out.print("hhhhhh");
-			
+
 			if (rs.next()) {
-			
-				System.out.print("oooooooooooooooo");
-				
 				String updateString = "UPDATE users SET password='"+newPassword+"' where logname='"+logname+"'";
 				int m = sql.executeUpdate(updateString);
 				
-				if (m==1) {
-					passwordBean.setBackNews("密码修改成功");
-					passwordBean.setOldPassword(oldPassword);
-					passwordBean.setNewPassword(newPassword);
+				if (!newPassword.equals(confirmPassword)) {
+					passwordBean.setBackNews("确认密码不相同");
 				} else {
-					passwordBean.setBackNews("密码修改失败");
+					if (m==1) {
+						passwordBean.setBackNews("密码修改成功");
+						passwordBean.setOldPassword(oldPassword);
+						passwordBean.setNewPassword(newPassword);
+					} else {
+						passwordBean.setBackNews("密码修改失败");
+					}
 				}
 			}
 		} catch (SQLException exp) {

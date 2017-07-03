@@ -4,17 +4,17 @@ public class Manager {
 	String managerName, managerPassword, backNews="";
 	boolean success = false;
 
-	public void setLogname(String name) {
+	public void setManagerName(String name) {
 		managerName = name;
 	}
-	public String getLogname() {
+	public String getManagerName() {
 		return managerName;
 	}
 
-	public void setPassword(String pw) {
+	public void setManagerPassword(String pw) {
 		managerPassword = pw;
 	}
-	public String getPassword() {
+	public String getManagerPassword() {
 		return managerPassword;
 	}
 

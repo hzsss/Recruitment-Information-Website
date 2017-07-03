@@ -5,30 +5,118 @@
 <html>
   <head>
   	<%@ include file = "head.txt" %>
+  	<meta charset="UTF-8">
+<style type="text/css">
+	
+		* {margin: 0; padding: 0; }
+		
+		body {
+			font-family: Ubuntu, arial, verdana;
+			background: #fff;
+		}
+		.pricing_table {
+			line-height: 150%; 
+			font-size: 12px; 
+			margin: 0 auto; 
+			width: 75%; 
+			max-width: 800px; 
+			padding-top: 10px;
+			margin-top: 100px;
+		}
+		
+		
+		.price_number{
+			display: table; 
+			background: #444; 
+			width: 100%; 
+			height: 80px; 
+
+
+			font-weight: bold; 
+			display: block;
+
+			text-align: center; 
+			
+			color: #fff; 
+			float: left; 
+			list-style-type: none; 
+			transition: all 0.25s; 
+			position: relative; 
+			box-sizing: border-box;
+			
+			margin-bottom: 10px; 
+			border-bottom: 1px solid transparent; 
+
+			font-size: 20px; 
+			text-transform: uppercase; 
+			vertical-align: middle; 
+			display: table-cell;
+		}
+		.features {
+			background: #DEF0F4; 
+			color: #000;
+			padding: 8px 15px;
+			border-bottom: 1px solid #ccc; 
+			font-size: 11px; 
+			list-style-type: none;
+		}
+		.tr {
+			text-transform: uppercase; 
+			padding: 5px 0; 
+			background: #333; 
+			margin: -10px 0 1px 0;
+			color: #fff;
+			padding: 8px 15px;
+			border-bottom: 1px solid #ccc; 
+			font-size: 11px; 
+			list-style-type: none;
+		}
+		.features:hover {
+			box-shadow: 0 0 0px 5px rgba(0, 0, 0, 0.5); 
+			transform: scale(1.04) translateY(-2px); 
+			z-index: 1; 
+			border-bottom: 0 none;
+		}
+		.features:hover .price {
+			background:linear-gradient(#DB7224, #F9B84A); 
+			box-shadow: inset 0 0 10px 1px #DB7224;
+		}
+		.features:hover {
+			background: #222;
+		}
+		.features:hover{
+			background: linear-gradient(#F9B84A, #DB7224); 
+		}
+
+
+</style>
   </head>
   <body><center>
- 	<table border = 1>
- 		<tr>
- 			<th>标识</th><th>用户名</th><th>标题</th><th>招聘信息</th>
- 			<th>类别</th><th>发布时间</th><th>联系人</th><th>联系电话</th>
+ 	<table class="pricing_table"><div class="price">
+ 		<tr class="tr">
+ 			<td>标识</td><td>用户名</td><td>标题</td><td>招聘信息</td>
+ 			<td>类别</td><td>发布时间</td><td>联系人</td><td>联系电话</td><td>查看详情</td>
  		</tr>
 <!-- 			<jsp:getProperty property="presentPageResult" name="index"/> -->
 		<%
 			Index in = (Index)request.getAttribute("index");
 		 %>
 		 <%=in.getPresentPageResult() %>
+		 </div>
 		</table>
 
 		<table>
 			<tr>
 				<td>
 					<form action="helpIndex" method="post" name="form">
+						<input type="hidden" name="newstype" value=<%=index.getNewstype() %>>
 						<input type="hidden" value="<%=index.getShowPage()-1 %>" name="showPage">
 						<input type="submit" value="上一页" name="submit">
 					</form>
 				</td>
 				<td>
 					<form action="helpIndex" method="post" name="form">
+						<input type="hidden" name="newstype" value=<%=index.getNewstype() %>>
 						<input type="hidden" value="<%=index.getShowPage()+1 %>" name="showPage">
 						<input type="submit" value="下一页" name="submit">
 					</form>

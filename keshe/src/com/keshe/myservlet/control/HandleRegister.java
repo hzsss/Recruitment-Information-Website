@@ -25,13 +25,17 @@ public class HandleRegister extends HttpServlet {
 		request.setAttribute("register", reg);
 		String logname = request.getParameter("logname").trim();
 		String password = request.getParameter("password").trim();
-
-		String uri = "jdbc:mysql://localhost/factory";
+		String confirmPassword = request.getParameter("confirmPassword").trim();
+		String backNews = "";
+		String uri = "jdbc:mysql://localhost/factory?useUnicode=true&characterEncoding=utf-8&useSSL=false";
 		if (logname==null) {
 			logname="";
 		}
 		if (password==null) {
 			password="";
+		}
+		if (confirmPassword==null) {
+			confirmPassword="";
 		}
 
 		boolean isLD = true;
@@ -41,36 +45,45 @@ public class HandleRegister extends HttpServlet {
 				isLD = false;
 			}
 		}
-
-		boolean boo = logname.length()>0 && password.length()>0 && isLD;
-		String backNews = "";
-
-		try {
-			con = DriverManager.getConnection(uri, "root", "7162");
-			String insertCondition = "INSERT INTO users VALUES(?,?)";
-			sql = con.prepareStatement(insertCondition);
-			if (boo) {
-				sql.setString(1, logname);
-				sql.setString(2, password);
-
-				int m = sql.executeUpdate();
-				if (m!=0) {
-					backNews = "注册成功";
-					reg.setBackNews(backNews);
-					reg.setLogname(logname);
-					reg.setPassword(password);
-				}
-			} else {
-				backNews = "信息填写不完整或者有非法字符";
-				reg.setBackNews(backNews);
-			}
-			con.close();
-		} catch (SQLException exp) {
-			backNews="该用户名已被占用";
-			reg.setBackNews(backNews);
-			reg.setLogname(logname);
-		}
 		
+		if (!password.equals(confirmPassword)) {
+			backNews = "两次密码输入不相同";
+			reg.setBackNews(backNews);
+		} else {
+			
+			boolean boo = logname.length()>0 && password.length()>0 && confirmPassword.length()>0 && isLD;
+			
+			try {
+				con = DriverManager.getConnection(uri, "root", "7162");
+				String insertCondition = "INSERT INTO users VALUES(?,?)";
+				sql = con.prepareStatement(insertCondition);
+				if (boo) {
+					sql.setString(1, logname);
+					sql.setString(2, password);
+
+					int m = sql.executeUpdate();
+					if (m!=0) {
+						backNews = "注册成功";
+						reg.setBackNews(backNews);
+						reg.setLogname(logname);
+						reg.setPassword(password);					
+					}
+				} else {
+					backNews = "请输入正确的账号和密码格式";
+					reg.setBackNews(backNews);
+				}
+				con.close();
+			} catch (SQLException exp) {
+				backNews="该用户名已被占用";
+				reg.setBackNews(backNews);
+				reg.setLogname(logname);
+			}
+			
+//			response.setContentType("text/html;charset=gb2312"); // 乱码解决
+//			response.getWriter().print("<script language='javascript'>alert('backNews');</script>");
+//			response.setHeader("refresh", "0.1;index.jsp"); // 延迟0.1秒
+//			return;
+		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher("showRegister.jsp");
 		dispatcher.forward(request, response);
 	}

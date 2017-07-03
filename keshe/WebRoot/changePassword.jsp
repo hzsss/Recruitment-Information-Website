@@ -9,6 +9,7 @@
 	<form action="helpChangePassword" method="post">
 		<br>当前密码：<input type="password" name="oldPassword">
 		<br>新密码：<input type="password" name="newPassword">
+		<br>确认新密码：<input type="password" name="confirmPassword">
 		<br><input type="submit" name="g" value="提交">
 	</form>
 </center>	

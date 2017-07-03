@@ -9,8 +9,16 @@
 		<h1><font size="4" color="red">欢迎浏览招聘信息</font></h1>
 		<br><br>
 		<form action="helpIndex" name="form" method="post">
+			<input type="hidden" name="newstype" value=0>
 			<input type="hidden" name="showPage" value="1">
 			<input type="submit" name="submit" value="查看招聘信息">
+
+
+		</form>
+		<form action="helpIndex" name="form" method="post">
+			<input type="hidden" name="newstype" value=1>
+			<input type="hidden" name="showPage" value="1">
+			<input type="submit" name="submit" value="餐饮">
 		</form>
 	</center>
 </body>

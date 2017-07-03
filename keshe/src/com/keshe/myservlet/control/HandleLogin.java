@@ -42,7 +42,7 @@ public class HandleLogin extends HttpServlet {
 			backNews = logname+"已经登录了";
 			loginBean.setBackNews(backNews);
 		} else {
-			String uri = "jdbc:mysql://localhost/factory";
+			String uri = "jdbc:mysql://localhost/factory?useUnicode=true&characterEncoding=utf-8&useSSL=false";
 			boolean boo = (logname.length()>0)&&(password.length()>0);
 			
 			try {
@@ -61,12 +61,15 @@ public class HandleLogin extends HttpServlet {
 						loginBean.setBackNews(backNews);
 						loginBean.setSuccess(true);
 						loginBean.setLogname(logname);
+						
 					} else {
 						backNews = "您输入的用户名不存在或者密码不正确";
 						loginBean.setBackNews(backNews);
 						loginBean.setSuccess(false);
 						loginBean.setLogname(logname);
 						loginBean.setPassword(password);
+						
+
 					}
 				} else {
 					backNews = "您输入的用户名不存在或者密码不正确";
@@ -74,6 +77,7 @@ public class HandleLogin extends HttpServlet {
 					loginBean.setSuccess(false);
 					loginBean.setLogname(logname);
 					loginBean.setPassword(password);
+
 				}
 				con.close();
 			} catch (SQLException exp) {

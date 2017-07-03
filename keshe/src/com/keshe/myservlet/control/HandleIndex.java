@@ -25,6 +25,7 @@ public class HandleIndex extends HttpServlet {
 		StringBuffer presentPageResult = new StringBuffer();
 		Index index = null;
 		
+		
 		try {
 			index = (Index)session.getAttribute("index");
 			if (index == null) {
@@ -37,6 +38,11 @@ public class HandleIndex extends HttpServlet {
 		int pageSize = index.getPageSize();
 		int showPage = Integer.parseInt(request.getParameter("showPage"));
 		
+		int newstype = Integer.parseInt(request.getParameter("newstype"));
+		index.setNewstype(newstype);
+		
+		System.out.print(newstype);
+		
 		if (showPage>index.getPageAllCount()) {
 			showPage = 1;
 			index.setShowPage(showPage);
@@ -46,13 +52,21 @@ public class HandleIndex extends HttpServlet {
 		} else {
 			index.setShowPage(showPage);
 		}
-
+		
 		
 		String uri = "jdbc:mysql://localhost/factory?useUnicode=true&characterEncoding=utf-8&useSSL=false";
 		try {
 			con = DriverManager.getConnection(uri, "root", "7162");
 			Statement sql = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			ResultSet rs = sql.executeQuery("SELECT * FROM news");
+			ResultSet rs = null;
+			
+			if (newstype==0) {
+				rs = sql.executeQuery("SELECT * FROM news");
+			} else{
+				rs = sql.executeQuery("SELECT * FROM news where newstype="+newstype);
+			}
+			
+		
 			rowSet = new CachedRowSetImpl();
 			rowSet.populate(rs);
 			con.close();
@@ -76,9 +90,9 @@ public class HandleIndex extends HttpServlet {
 		try {
 			rowSet.absolute((page-1)*pageSize+1);
 			for (int i=1; i<=pageSize; i++) {
-				str.append("<tr>");
+				str.append("<tr class='features'>");
 				for (int j=1; j<=8; j++) {
-					str.append("<td>"+rowSet.getString(j)+"</td>");					
+					str.append("<td class='features'>"+rowSet.getString(j)+"</td>");					
 				}
 				
 				newsid = rowSet.getInt(1);
@@ -86,7 +100,7 @@ public class HandleIndex extends HttpServlet {
 				String detail="<form action='helpDetail' method='post'>"+
 						  "<input type='hidden' name='detail' value="+newsid+">"+"<input type='hidden' name='showPage' value=1>"+
 						  "<input type='submit' value='查看详情'></form>";
-				str.append("<td>"+detail+"</td>");
+				str.append("<td class='features'>"+detail+"</td>");
 				str.append("</tr>");
 				rowSet.next();
 			}

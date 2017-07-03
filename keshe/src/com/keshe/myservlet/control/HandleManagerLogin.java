@@ -40,11 +40,11 @@ public class HandleManagerLogin extends HttpServlet {
 		String managerPassword = request.getParameter("managerPassword").trim();
 		boolean ok = manager.getSuccess();
 		
-		if (ok==true&&managerName.equals(manager.getLogname())) {
+		if (ok==true&&managerName.equals(manager.getManagerName())) {
 			backNews = managerName+"已经登录了";
 			manager.setBackNews(backNews);
 		} else {
-			String uri = "jdbc:mysql://localhost/factory";
+			String uri = "jdbc:mysql://localhost/factory?useUnicode=true&characterEncoding=utf-8&useSSL=false";
 			boolean boo = (managerName.length()>0)&&(managerPassword.length()>0);
 			
 			try {
@@ -62,27 +62,22 @@ public class HandleManagerLogin extends HttpServlet {
 						backNews = "登录成功";
 						manager.setBackNews(backNews);
 						manager.setSuccess(true);
-						manager.setLogname(managerName);
-				
-
-						
+						manager.setManagerName(managerName);						
 					} else {
 						backNews = "您输入的用户名不存在或者密码不正确";
 						manager.setBackNews(backNews);
 						manager.setSuccess(false);
-						manager.setLogname(managerName);
-						manager.setPassword(managerPassword);
-						
-					
+						manager.setManagerName(managerName);
+						manager.setManagerPassword(managerPassword);				
 					}
 				} else {
 					backNews = "您输入的用户名不存在或者密码不正确";
 					manager.setBackNews(backNews);
 					manager.setSuccess(false);
-					manager.setLogname(managerName);
-					manager.setPassword(managerPassword);
-					
+					manager.setManagerName(managerName);
+					manager.setManagerPassword(managerPassword);			
 				}
+				request.setAttribute("manager", manager);
 				con.close();
 			} catch (SQLException exp) {
 				backNews = ""+exp;
@@ -91,12 +86,8 @@ public class HandleManagerLogin extends HttpServlet {
 			}
 		}
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("showManagerLogin.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("manager.jsp");
 		dispatcher.forward(request, response);
-//		response.setContentType("text/html;charset=gb2312"); // 乱码解决
-//		response.getWriter().print("<script language='javascript'>alert('ID不存在!');</script>");
-//		response.setHeader("refresh", "0.1;managerLogin.jsp"); // 延迟0.1秒
-//		return;
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)

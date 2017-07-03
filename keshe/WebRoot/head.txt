@@ -9,5 +9,6 @@
 		<td><a href="changePassword.jsp"><font size="2">修改密码</font></a></td>
 		<td><a href="helpExit"><font size="2">退出登录</font></a></td>
 		<td><a href="managerLogin.jsp"><font size="2">管理员登录</font></a></td>
+		<td><a href="helpManager"><font size="2">评论信息管理</font></a></td>
 	</tr>
 </table>

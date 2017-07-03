@@ -24,9 +24,9 @@ public class HandleShowComment extends HttpServlet {
 		Connection con = null;
 		StringBuffer presentPageResult = new StringBuffer();
 		Detail detail = (Detail)session.getAttribute("detail");
-
 		
 		int showPage = Integer.parseInt(session.getAttribute("showPage").toString());
+		int newsid = detail.getNewsid();
 		
 		int pageSize = detail.getPageSize();
 		if (showPage>detail.getPageAllCount()) {
@@ -44,7 +44,7 @@ public class HandleShowComment extends HttpServlet {
 		try {
 			con = DriverManager.getConnection(uri, "root", "7162");
 			Statement sql = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			ResultSet rs = sql.executeQuery("SELECT * FROM comment");
+			ResultSet rs = sql.executeQuery("SELECT * FROM comment where newsid ="+newsid);
 			rowSet = new CachedRowSetImpl();
 			rowSet.populate(rs);
 			con.close();
@@ -57,13 +57,18 @@ public class HandleShowComment extends HttpServlet {
 
 			
 			detail.setPageAllCount(pageAllCount);
-			presentPageResult = show(showPage, pageSize, rowSet);
+			
+			if (m!=0) {
+				presentPageResult = show(showPage, pageSize, rowSet);
+			} else {
+
+			}
+
 			detail.setPresentPageResult(presentPageResult);
 			request.setAttribute("detail", detail);
 		} catch(SQLException exp) {}
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("showDetail.jsp");
-		dispatcher.forward(request, response);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("showDetail.jsp");
+			dispatcher.forward(request, response);
 	}
 	public StringBuffer show(int page, int pageSize, CachedRowSetImpl rowSet) {
 		StringBuffer str = new StringBuffer();
