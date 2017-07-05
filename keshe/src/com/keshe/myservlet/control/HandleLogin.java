@@ -41,6 +41,8 @@ public class HandleLogin extends HttpServlet {
 		if (ok==true&&logname.equals(loginBean.getLogname())) {
 			backNews = logname+"已经登录了";
 			loginBean.setBackNews(backNews);
+			request.setAttribute("message", "已经登录了！");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else {
 			String uri = "jdbc:mysql://localhost/factory?useUnicode=true&characterEncoding=utf-8&useSSL=false";
 			boolean boo = (logname.length()>0)&&(password.length()>0);
@@ -62,6 +64,9 @@ public class HandleLogin extends HttpServlet {
 						loginBean.setSuccess(true);
 						loginBean.setLogname(logname);
 						
+						request.setAttribute("message", "登录成功！");
+						request.getRequestDispatcher("index.jsp").forward(request, response);
+						
 					} else {
 						backNews = "您输入的用户名不存在或者密码不正确";
 						loginBean.setBackNews(backNews);
@@ -69,7 +74,8 @@ public class HandleLogin extends HttpServlet {
 						loginBean.setLogname(logname);
 						loginBean.setPassword(password);
 						
-
+						request.setAttribute("message", "登录失败！");
+						request.getRequestDispatcher("login.jsp").forward(request, response);
 					}
 				} else {
 					backNews = "您输入的用户名不存在或者密码不正确";
@@ -77,7 +83,8 @@ public class HandleLogin extends HttpServlet {
 					loginBean.setSuccess(false);
 					loginBean.setLogname(logname);
 					loginBean.setPassword(password);
-
+					request.setAttribute("message", "登录失败！");
+					request.getRequestDispatcher("login.jsp").forward(request, response);
 				}
 				con.close();
 			} catch (SQLException exp) {
@@ -86,8 +93,8 @@ public class HandleLogin extends HttpServlet {
 				loginBean.setSuccess(false);
 			}
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("showLogin.jsp");
-		dispatcher.forward(request, response);
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("showLogin.jsp");
+//		dispatcher.forward(request, response);
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)

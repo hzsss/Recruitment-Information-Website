@@ -34,12 +34,16 @@ public class HandleDetail extends HttpServlet {
 			ResultSet rs = sql.executeQuery("SELECT * FROM news where newsid ="+newsid);
 			rs.next();
 			
+			String logname = rs.getString("logname");
 			String title = rs.getString("title");
-			String contact = rs.getString(7);
-			String number = rs.getString(8);
-			String message = rs.getString(4);
+			String uptime = rs.getString("uptime");
+			String contact = rs.getString("contact");
+			String number = rs.getString("number");
+			String message = rs.getString("message");
 			
+			detail.setLogname(logname);
 			detail.setTitle(title);
+			detail.setUptime(uptime);
 			detail.setContact(contact);
 			detail.setNumber(number);
 			detail.setMessage(message);

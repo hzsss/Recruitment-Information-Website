@@ -72,19 +72,26 @@ public class HandlePublish extends HttpServlet {
 						pub.setContact(contact);
 						pub.setNumber(number);
 						pub.setUptime(uptime);
+						
+						request.setAttribute("message", "发布成功，返回主页查看！");
+						request.getRequestDispatcher("index.jsp").forward(request, response);
 					}
 				} else {
 					System.out.println("dddd");
 					backNews = "信息填写不完整，发布失败";
 					pub.setBackNews(backNews);
+					request.setAttribute("message", "信息填写不完整，发布失败！");
+					request.getRequestDispatcher("publish.jsp").forward(request, response);
 				}
 				con.close();
 			} catch (SQLException exp) {
 				backNews = "登录后才能发布信息哦~";
 				pub.setBackNews(backNews);
+				request.setAttribute("message", "登录后才能发布信息！");
+				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}
-			RequestDispatcher dispatcher = request.getRequestDispatcher("showPublish.jsp");
-			dispatcher.forward(request, response);
+//			RequestDispatcher dispatcher = request.getRequestDispatcher("showPublish.jsp");
+//			dispatcher.forward(request, response);
 		} else {
 			response.sendRedirect("login.jsp");
 		}

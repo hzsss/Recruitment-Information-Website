@@ -3,7 +3,7 @@ import com.sun.rowset.*;
 
 public class Index {
 	CachedRowSetImpl rowSet = null; // 储存表中全部记录的行集对象
-	int pageSize = 2; // 每页显示的记录数
+	int pageSize = 10; // 每页显示的记录数
 	int pageAllCount = 0; // 分页后的总页数
 	int showPage = 1; // 当前显示页
 	StringBuffer presentPageResult = null; // 显示当前页内容

@@ -19,7 +19,8 @@ public class HandleExit extends HttpServlet {
 		boolean ok = true;
 		if(login ==null){
 			ok=false;
-			response.sendRedirect("login.jsp");	
+			request.setAttribute("message", "您未登录！");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 		if(ok ==true){
 			
@@ -31,7 +32,8 @@ public class HandleExit extends HttpServlet {
 		HttpServletResponse response) throws ServletException,IOException{
 		HttpSession session =request.getSession(true);
 		session.invalidate();
-		response.sendRedirect("index.jsp");
+		request.setAttribute("message", "退出登录！");
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)

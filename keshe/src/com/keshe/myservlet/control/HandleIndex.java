@@ -66,17 +66,26 @@ public class HandleIndex extends HttpServlet {
 				rs = sql.executeQuery("SELECT * FROM news where newstype="+newstype);
 			}
 			
-		
 			rowSet = new CachedRowSetImpl();
 			rowSet.populate(rs);
 			con.close();
+			
+			int count = 0;
+			while(rowSet.next()) {
+				count += 1;
+			}
+			
 			index.setRowSet(rowSet);
 			rowSet.last();
-			int m = rowSet.getRow();
+			int m = rowSet.getRow();			
 			int n = pageSize;
 			int pageAllCount = ((m%n)==0)?(m/n):(m/n+1);
 			index.setPageAllCount(pageAllCount);
-			presentPageResult = show(showPage, pageSize, rowSet);
+
+			if (count!=0) {
+				presentPageResult = show(showPage, pageSize, rowSet);
+			}
+			
 			request.setAttribute("index", index);
 			session.setAttribute("index", index);
 			index.setPresentPageResult(presentPageResult);
@@ -91,10 +100,15 @@ public class HandleIndex extends HttpServlet {
 			rowSet.absolute((page-1)*pageSize+1);
 			for (int i=1; i<=pageSize; i++) {
 				str.append("<tr class='features'>");
-				for (int j=1; j<=8; j++) {
-					str.append("<td class='features'>"+rowSet.getString(j)+"</td>");					
-				}
-				
+//				for (int j=1; j<=8; j++) {
+//					str.append("<td class='features'>"+rowSet.getString(j)+"</td>");					
+//				}
+				str.append("<td class='features'>"+rowSet.getString("logname")+"</td>");
+				str.append("<td class='features'>"+rowSet.getString("title")+"</td>");
+				str.append("<td class='features'>"+rowSet.getString("message")+"</td>");
+				str.append("<td class='features'>"+rowSet.getString("uptime")+"</td>");
+				str.append("<td class='features'>"+rowSet.getString("contact")+"</td>");
+				str.append("<td class='features'>"+rowSet.getString("number")+"</td>");
 				newsid = rowSet.getInt(1);
 				
 				String detail="<form action='helpDetail' method='post'>"+

@@ -36,8 +36,8 @@ public class HandleManager extends HttpServlet {
 				try {
 					while (rs.next()) {
 						str.append("<tr class='features'>");
-						str.append("<td>"+rs.getString("logname")+"</td>");
-						str.append("<td>"+rs.getString("comment")+"</td>");
+						str.append("<td class='features'>"+rs.getString("logname")+"</td>");
+						str.append("<td class='features'>"+rs.getString("comment")+"</td>");
 						
 						int commentid = rs.getInt("commentid"); // 评论的id
 

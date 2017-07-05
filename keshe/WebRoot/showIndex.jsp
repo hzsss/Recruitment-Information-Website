@@ -4,8 +4,7 @@
 <jsp:useBean id = "index" class="com.keshe.mybean.data.Index" scope="session"/> 
 <html>
   <head>
-  	<%@ include file = "head.txt" %>
-  	<meta charset="UTF-8">
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <style type="text/css">
 	
 		* {margin: 0; padding: 0; }
@@ -90,12 +89,29 @@
 
 
 </style>
+<link rel="stylesheet" type="text/css" href="index.css" />
   </head>
   <body><center>
+	<nav class="mynav">
+	
+  	<ul>
+  	<li><img src="img/zp.png" alt="招聘信息"></li>
+    <li><a href="index.jsp">主页</a></li>
+    <li><a href="register.jsp">用户注册</a></li>
+    <li><a href="login.jsp">用户登录</a></li>
+    <li><a href="publish.jsp">发布招聘信息</a></li>
+    <li><a href="changePassword.jsp">修改密码</a></li>
+    <li><a href="helpExit">退出登录</a></li>
+    <li><a href="managerLogin.jsp">管理员登陆</a></li>
+    <li><a href="helpManager">评论信息管理</a></li>
+ 	 </ul>
+</nav>
+
+<span class="target"></span>
  	<table class="pricing_table"><div class="price">
  		<tr class="tr">
- 			<td>标识</td><td>用户名</td><td>标题</td><td>招聘信息</td>
- 			<td>类别</td><td>发布时间</td><td>联系人</td><td>联系电话</td><td>查看详情</td>
+ 			<td>用户名</td><td>标题</td><td>招聘信息</td>
+ 			<td>发布时间</td><td>联系人</td><td>联系电话</td><td>查看详情</td>
  		</tr>
 <!-- 			<jsp:getProperty property="presentPageResult" name="index"/> -->
 		<%
@@ -129,5 +145,6 @@
 				</td>
 			</tr>
 		</table></center>
+		<script type="text/javascript" src="js/nav.js"></script>
   </body>
 </html>

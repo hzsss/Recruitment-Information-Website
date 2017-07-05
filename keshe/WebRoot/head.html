@@ -1,0 +1,108 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>css3下划线跟随文字导航菜单特效</title>
+
+<style>
+body {
+  background: #ededed;
+  padding: 0 20px;
+  margin: 0;
+  font-family: 'Open Sans', Arial, sans-serif;
+}
+
+.mynav ul {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+}
+
+
+.mynav a {
+  display: block;
+  font-size: 20px;
+  color: #76aff8;
+  text-decoration: none;
+  padding: 20px 15px;
+}
+.mynav a:hover{
+  padding-bottom: 5px;
+  border-bottom: 1px solid #76aff8;
+}
+
+.target {
+  position: absolute;
+  border-bottom: 4px solid transparent;
+  z-index: -1;
+  -webkit-transform: translateX(-60px);
+          transform: translateX(-60px);
+}
+.mynav img{
+  width: 225px;
+  height: 65px;
+  margin-right: 20px;
+}
+.mynav a,
+.target {
+  -webkit-transition: all .35s ease-in-out;
+  transition: all .35s ease-in-out;
+}
+</style>
+
+</head>
+<body><script src="/demos/googlegg.js"></script>
+
+<nav class="mynav">
+  <ul>
+  <li><img src="img/zp.png" alt="招聘信息"></li>
+    <li><a href="index.jsp">主页</a></li>
+    <li><a href="register.jsp">用户注册</a></li>
+    <li><a href="login.jsp">用户登录</a></li>
+    <li><a href="publish.jsp">发布招聘信息</a></li>
+    <li><a href="changePassword.jsp">修改密码</a></li>
+    <li><a href="helpExit">退出登录</a></li>
+    <li><a href="managerLogin.jsp">管理员登陆</a></li>
+    <li><a href="helpManager">评论信息管理</a></li>
+  </ul>
+</nav>
+
+
+<span class="target"></span>
+
+ <script>
+"use strict";
+
+(function () {
+  var links = document.querySelectorAll(".mynav a");
+
+  function mouseenterFunc() {
+    if (!this.parentNode.classList.contains("active")) {
+      for (var i = 0; i < links.length; i++) {
+        if (links[i].parentNode.classList.contains("active")) {
+          links[i].parentNode.classList.remove("active");
+        }
+        links[i].style.opacity = "0.25";
+      }
+
+      this.parentNode.classList.add("active");
+      this.style.opacity = "1";
+
+    }
+  }
+
+  for (var i = 0; i < links.length; i++) {
+    links[i].addEventListener("mouseenter", mouseenterFunc);
+  }
+
+  function resizeFunc() {
+    var active = document.querySelector(".mynav li.active");
+  }
+
+  window.addEventListener("resize", resizeFunc);
+})();</script>
+
+
+</body>
+</html>

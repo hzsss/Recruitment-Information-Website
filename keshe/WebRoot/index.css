@@ -1,0 +1,45 @@
+.mynav ul {
+			 display: flex;
+			  justify-content: center;
+			  list-style-type: none;
+			}
+
+		.mynav li:not(:last-child) {
+		  	margin-right: 20px;
+		}
+
+		.mynav a {
+		  display: block;
+		  font-size: 20px;
+		  color: #76aff8;
+		  text-decoration: none;
+		  padding: 20px 12px;
+		}
+		.mynav a:hover{
+		  padding-bottom: 5px;
+		  border-bottom: 1px solid #76aff8;
+		  
+		}
+
+		.target {
+		  position: absolute;
+		  border-bottom: 4px solid transparent;
+		  z-index: -1;
+		  -webkit-transform: translateX(-60px);
+		          transform: translateX(-60px);
+		}
+
+		.mynav a,
+		.target {
+		  -webkit-transition: all .35s ease-in-out;
+		  transition: all .35s ease-in-out;
+		}
+		.mynav{
+		margin-top: 35px;
+		margin-bottom: 40px;
+		}
+
+		.mynav img{
+			width: 225px;
+			height: 65px;
+		}

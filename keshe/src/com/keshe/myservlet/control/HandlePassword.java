@@ -23,7 +23,8 @@ public class HandlePassword extends HttpServlet {
 		boolean ok = true;
 		if (login==null) {
 			ok = false;
-			response.sendRedirect("login.jsp");
+			request.setAttribute("message", "您尚未登录！");
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 		if (ok==true) {
 			continueWork(request, response);
@@ -55,18 +56,26 @@ public class HandlePassword extends HttpServlet {
 				
 				if (!newPassword.equals(confirmPassword)) {
 					passwordBean.setBackNews("确认密码不相同");
+					request.setAttribute("message", "确认密码不相同！");
+					request.getRequestDispatcher("changePassword.jsp").forward(request, response);
 				} else {
 					if (m==1) {
 						passwordBean.setBackNews("密码修改成功");
 						passwordBean.setOldPassword(oldPassword);
 						passwordBean.setNewPassword(newPassword);
+						request.setAttribute("message", "密码修改成功！");
+						request.getRequestDispatcher("index.jsp").forward(request, response);
 					} else {
 						passwordBean.setBackNews("密码修改失败");
+						request.setAttribute("message", "密码修改失败！");
+						request.getRequestDispatcher("changePassword.jsp").forward(request, response);
 					}
 				}
 			}
 		} catch (SQLException exp) {
 			passwordBean.setBackNews("密码修改失败"+exp);
+			request.setAttribute("message", "密码修改失败！");
+			request.getRequestDispatcher("changePassword.jsp").forward(request, response);
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("showNewPassword.jsp");

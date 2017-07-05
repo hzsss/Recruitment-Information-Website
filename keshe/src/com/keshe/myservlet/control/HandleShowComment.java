@@ -75,10 +75,10 @@ public class HandleShowComment extends HttpServlet {
 		try {
 			rowSet.absolute((page-1)*pageSize+1);
 			for (int i=1; i<=pageSize; i++) {
-				str.append("<tr>");
+				str.append("<tr class='features'>");
 				
-				str.append("<td>"+rowSet.getString("logname")+"</td>");
-				str.append("<td>"+rowSet.getString("comment")+"</td>");
+				str.append("<td class='features'>"+rowSet.getString("logname")+"</td>");
+				str.append("<td class='features'>"+rowSet.getString("comment")+"</td>");
 				
 				int commentid = rowSet.getInt("commentid"); // 评论的id
 				String comlogname = rowSet.getString("logname"); // 评论的用户名
@@ -89,7 +89,7 @@ public class HandleShowComment extends HttpServlet {
 				String detail="<form action='helpDeleteComment' method='post'>"+"<input type='hidden' name='commentid' value="+commentid+">"
 						+"<input type='hidden' name='comlogname' value="+comlogname+">"+
 						  "<input type='submit' value='删除评论'></form>";
-				str.append("<td>"+detail+"</td>");
+				str.append("<td class='features'>"+detail+"</td>");
 				str.append("</tr>");
 				rowSet.next();
 			}
