@@ -2,6 +2,8 @@ package com.keshe.myservlet.control;
 
 import java.util.Date; 
 import java.util.Calendar; 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.text.SimpleDateFormat; 
 import java.io.*;
 import java.sql.*;
@@ -42,6 +44,15 @@ public class HandlePublish extends HttpServlet {
 		String contact = request.getParameter("contact").trim();
 		String number = request.getParameter("number").trim();
 		String uri = "jdbc:mysql://localhost/factory?useUnicode=true&characterEncoding=utf-8&useSSL=false";
+		
+		String regExp = "^[1]([3][0-9]{1}|59|58|88|89)[0-9]{8}$";
+		Pattern p = Pattern.compile(regExp);
+		Matcher m = p.matcher(number);
+		
+		if (m.find()==false && number.length()!=11) {
+			request.setAttribute("message", "电话号码格式不正确！");
+			request.getRequestDispatcher("publish.jsp").forward(request, response);
+		} else {
 		
 		if (loginBean!=null) {
 			
@@ -95,7 +106,7 @@ public class HandlePublish extends HttpServlet {
 		} else {
 			response.sendRedirect("login.jsp");
 		}
-
+	}
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
