@@ -78,8 +78,8 @@ public class HandlePassword extends HttpServlet {
 			request.getRequestDispatcher("changePassword.jsp").forward(request, response);
 		}
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("showNewPassword.jsp");
-		dispatcher.forward(request, response);
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("showNewPassword.jsp");
+//		dispatcher.forward(request, response);
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response)

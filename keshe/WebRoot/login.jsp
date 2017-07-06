@@ -284,7 +284,7 @@ a.back{
 
 				<div class="bottom">
 					<input type="submit" name="g" value="登录"></input>
-					<a href="zhuce.jsp" class="linkform">您是新用户想要注册？</a>
+					<a href="register.jsp" class="linkform">您是新用户想要注册？</a>
 					<div class="clear"></div>
 				</div>
 			</form>

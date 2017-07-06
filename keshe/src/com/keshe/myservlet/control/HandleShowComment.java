@@ -83,9 +83,6 @@ public class HandleShowComment extends HttpServlet {
 				int commentid = rowSet.getInt("commentid"); // 评论的id
 				String comlogname = rowSet.getString("logname"); // 评论的用户名
 
-//				for (int j=1; j<=4; j++) {
-//					str.append("<td>"+rowSet.getString(j)+"</td>");
-//				}
 				String detail="<form action='helpDeleteComment' method='post'>"+"<input type='hidden' name='commentid' value="+commentid+">"
 						+"<input type='hidden' name='comlogname' value="+comlogname+">"+
 						  "<input type='submit' value='删除评论'></form>";

@@ -93,8 +93,6 @@ public class HandleLogin extends HttpServlet {
 				loginBean.setSuccess(false);
 			}
 		}
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("showLogin.jsp");
-//		dispatcher.forward(request, response);
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)

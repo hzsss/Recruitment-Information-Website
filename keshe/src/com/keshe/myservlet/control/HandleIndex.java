@@ -100,9 +100,7 @@ public class HandleIndex extends HttpServlet {
 			rowSet.absolute((page-1)*pageSize+1);
 			for (int i=1; i<=pageSize; i++) {
 				str.append("<tr class='features'>");
-//				for (int j=1; j<=8; j++) {
-//					str.append("<td class='features'>"+rowSet.getString(j)+"</td>");					
-//				}
+
 				str.append("<td class='features'>"+rowSet.getString("logname")+"</td>");
 				str.append("<td class='features'>"+rowSet.getString("title")+"</td>");
 				str.append("<td class='features'>"+rowSet.getString("message")+"</td>");

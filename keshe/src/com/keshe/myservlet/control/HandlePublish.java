@@ -101,10 +101,9 @@ public class HandlePublish extends HttpServlet {
 				request.setAttribute("message", "登录后才能发布信息！");
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}
-//			RequestDispatcher dispatcher = request.getRequestDispatcher("showPublish.jsp");
-//			dispatcher.forward(request, response);
 		} else {
-			response.sendRedirect("login.jsp");
+			request.setAttribute("message", "登录后才能发布信息！");
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 	}
 	}

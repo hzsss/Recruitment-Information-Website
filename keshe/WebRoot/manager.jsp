@@ -69,6 +69,11 @@
   			if (manager.getSuccess()==true) {
   		%>
   			<br>登录用户名称：<jsp:getProperty name="manager" property="managerName"/>
+  				<div class="button">
+	<form action="helpManager" name="form" method="post">
+		<input type="submit" value="管理评论信息" id="bt" />
+	</form>
+	</div>
   		<%	}
   			else {
   		 %>
@@ -79,11 +84,7 @@
   		  %>
 		</div>  
 	</div>
-	<div class="button">
-	<form action="helpManager" name="form" method="post">
-		<input type="submit" value="管理评论信息" id="bt" />
-	</form>
-	</div>
+
 </body>
 
 </html> 

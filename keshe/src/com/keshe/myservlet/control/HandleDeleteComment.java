@@ -39,7 +39,7 @@ public class HandleDeleteComment extends HttpServlet {
 					sql.executeUpdate("DELETE FROM comment where commentid = '"+commentid+"'");
 //					rs.next();
 				} else {
-					System.out.print("哥，这评论不是你发的删不了");
+					System.out.print("这评论不是你发的删不了");
 				}
 				
 			} catch(SQLException exp) {}

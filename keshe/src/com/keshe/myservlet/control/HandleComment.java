@@ -32,28 +32,33 @@ public class HandleComment extends HttpServlet {
 			System.out.print("传入的id为"+newsid);
 			String uri = "jdbc:mysql://localhost/factory?useUnicode=true&characterEncoding=utf-8&useSSL=false";
 			
-			try {
-				con = DriverManager.getConnection(uri, "root", "7162");
-				String insertCondition = "INSERT INTO comment(newsid,logname,comment) VALUES(?,?,?)";
-				sql = con.prepareStatement(insertCondition);
-				sql.setInt(1, newsid);
-				sql.setString(2, logname);
-				sql.setString(3, content);
-				int d = sql.executeUpdate();
-				if (d!=0) {
-					comment.setNewsid(newsid);
-					comment.setLogname(logname);
-					comment.setComment(content);
-				} else {
-				System.out.println("dddd");
+			if (content.length()>0) {
+				try {
+					con = DriverManager.getConnection(uri, "root", "7162");
+					String insertCondition = "INSERT INTO comment(newsid,logname,comment) VALUES(?,?,?)";
+					sql = con.prepareStatement(insertCondition);
+					sql.setInt(1, newsid);
+					sql.setString(2, logname);
+					sql.setString(3, content);
+					int d = sql.executeUpdate();
+					if (d!=0) {
+						comment.setNewsid(newsid);
+						comment.setLogname(logname);
+						comment.setComment(content);
+					} else {
+					System.out.println("dddd");
+					}
+					con.close();
+					
+				} catch(SQLException exp) {
+					System.out.print("错误");
 				}
-				con.close();
-				
-			} catch(SQLException exp) {
-				System.out.print("错误");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("helpShowComment");
+				dispatcher.forward(request, response);	
+			} else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("helpShowComment");
+				dispatcher.forward(request, response);	
 			}
-			RequestDispatcher dispatcher = request.getRequestDispatcher("helpShowComment");
-			dispatcher.forward(request, response);			
 		} else {
 			response.sendRedirect("login.jsp");
 		}

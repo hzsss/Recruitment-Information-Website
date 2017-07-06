@@ -75,6 +75,15 @@ input{
 </style>
 </head>
 <body>
+     <%
+     Object message = request.getAttribute("message");
+     if(message!=null && !"".equals(message)){
+ 
+ 	 %>
+      <script type="text/javascript">
+          alert("<%=message%>");
+      </script>
+ 	 <%} %>
 <nav class="mynav">
 	
   	<ul>

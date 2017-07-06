@@ -276,11 +276,11 @@ a.back{
 				<h2>Register</h2>
 				<div>
 					<label>用户名</label>
-					<input type="text" name="logname">
+					<input type="text" name="logname" placeholder="仅限英文和数字">
 				</div>
 				<div>
 					<label>密码</label>
-					<input type="password" name="password">
+					<input type="password" name="password" placeholder="包含英文大小写，数字和特殊字符">
 				</div>
 
 				<div>

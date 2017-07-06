@@ -56,7 +56,8 @@ public class HandleManager extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("managerFunction.jsp");
 			dispatcher.forward(request, response);
 		} else {
-			response.sendRedirect("managerLogin.jsp");	
+			request.setAttribute("message", "您尚未登录！");
+			request.getRequestDispatcher("managerLogin.jsp").forward(request, response);
 		}
 	}
 	

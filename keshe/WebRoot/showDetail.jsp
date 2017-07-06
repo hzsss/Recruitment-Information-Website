@@ -300,7 +300,7 @@ top: 570px;
 <br><br><br><br>
 </div>
 <span class="span2">信息详情</span><br><br>
-	<textarea id="message2" name="message2" placeholder=""><jsp:getProperty name="detail" property="message"/></textarea>
+	<textarea id="message2" name="message2" placeholder="" readonly="readonly"><jsp:getProperty name="detail" property="message"/></textarea>
 <div class="pinglun">
 <table class="pricing_table">
 		<tr class="tr">

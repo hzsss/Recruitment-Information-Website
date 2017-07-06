@@ -2,6 +2,8 @@ package com.keshe.myservlet.control;
 
 import com.keshe.mybean.data.*;
 import java.sql.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -56,6 +58,18 @@ public class HandleRegister extends HttpServlet {
 			
 			boolean boo = logname.length()>0 && password.length()>0 && confirmPassword.length()>0 && isLD;
 			
+	        Pattern pattern1 = Pattern.compile("[a-z]*");  
+	        Pattern pattern2 = Pattern.compile("[A-Z]*");  
+	        Pattern pattern3 = Pattern.compile("[0-9]*");  
+	        Pattern pattern4 = Pattern.compile("\\p{Punct}+");
+	        
+	        Matcher matcher1 = pattern1.matcher(password);  
+	        Matcher matcher2 = pattern2.matcher(password);  
+	        Matcher matcher3 = pattern3.matcher(password);  
+	        Matcher matcher4 = pattern4.matcher(password);
+	        
+	        if (matcher1.find()&&matcher2.find()&&matcher3.find()&&matcher4.find()) {
+			
 			try {
 				con = DriverManager.getConnection(uri, "root", "7162");
 				String insertCondition = "INSERT INTO users VALUES(?,?)";
@@ -72,7 +86,7 @@ public class HandleRegister extends HttpServlet {
 						reg.setPassword(password);	
 						
 						request.setAttribute("message", "注册成功！");
-						request.getRequestDispatcher("index.jsp").forward(request, response);
+						request.getRequestDispatcher("login.jsp").forward(request, response);
 					}
 				} else {
 					backNews = "请输入正确的账号和密码格式";
@@ -90,14 +104,11 @@ public class HandleRegister extends HttpServlet {
 				request.setAttribute("message", "该用户名已被占用！");
 				request.getRequestDispatcher("register.jsp").forward(request, response);
 			}
-			
-//			response.setContentType("text/html;charset=gb2312"); // 乱码解决
-//			response.getWriter().print("<script language='javascript'>alert('backNews');</script>");
-//			response.setHeader("refresh", "0.1;index.jsp"); // 延迟0.1秒
-//			return;
+	        } else {
+	        	request.setAttribute("message", "密码格式不正确！");
+				request.getRequestDispatcher("register.jsp").forward(request, response);
+	        }
 		}
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("showRegister.jsp");
-//		dispatcher.forward(request, response);
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
