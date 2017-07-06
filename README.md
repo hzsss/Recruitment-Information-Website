@@ -41,7 +41,7 @@ newsid，类型：int 长度：100 非空 `主键 自增`<br/>
 logname，类型：varchar 长度：20 非空 `外键`<br/>
 title，类型：varchar 长度：50 非空<br/>
 message，类型：varchar 长度：255 非空<br/>
-newstype，类型：varchar 长度：20 非空<br/>
+newstype，类型：int 长度：20 非空<br/>
 uptime，类型：varchar 长度：20 非空<br/>
 contact，类型：varchar 长度：20 非空<br/>
 number，类型：varchar 长度：20 非空<br/>
